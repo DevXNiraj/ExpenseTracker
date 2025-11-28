@@ -17,6 +17,18 @@
       padding: 20px;
       text-align: center;
     }
+
+  #signOutBtn, #homeBtn, #dashboardBtn, #servicesBtn, #aboutBtn, #signupBtn, #signinBtn, #aboutBtn{
+  width: 10%;
+  padding: 8px 0px;
+  border-radius: 50px;
+  background: white;
+  color: #34495e;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  
+}
     
 nav {
   background: #34495e;
@@ -31,7 +43,7 @@ nav a {
 }
 nav a:hover { text-decoration: underline }
     h1 {
-      margin: 0;
+      margin: 20px;
       text-align: center;
     }
     .services {
@@ -74,14 +86,36 @@ nav a:hover { text-decoration: underline }
     <p style="color: white;">Manage your budget smartly</p>
   </header>
 
-  <nav>
-    
-    <a href="homepage.html">Home</a>
-    <a href="signup.html">Sign-up</a>
-    <a href="signin.html">Sign-in</a>
-    <a href="services.html">Services</a>
-    <a href="about.html">About Us</a>
-  </nav>
+<nav>
+  <button id="homeBtn">Home</button>
+  <button id="dashboardBtn">Dashboard</button>
+  <button id="servicesBtn">Services</button>
+  <button id="aboutBtn">About Us</button>
+</nav>
+
+<script>
+  // Button navigation
+  document.getElementById("homeBtn").onclick = () => {
+      window.location.href = "homepage.html";
+  };
+
+  document.getElementById("dashboardBtn").onclick = () => {
+      window.location.href = "dashboard.html";
+  };
+
+  document.getElementById("signinBtn").onclick = () => {
+      window.location.href = "signin.html";
+  };
+
+  document.getElementById("servicesBtn").onclick = () => {
+      window.location.href = "services.html";
+  };
+
+  document.getElementById("aboutBtn").onclick = () => {
+      window.location.href = "about.html";
+  };
+</script>
+
 
     <h1>Our Services</h1>
     <p style="text-align: center;">What Expense Tracker offers you</p>

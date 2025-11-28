@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Expense Tracker</h1>
+    <p style="color: white;">Manage your budget smartly</p>
+  </header>
+
+  <nav>
+    <button id="homeBtn">Home</button>
+    <button id="dashboardBtn">Dashboard</button>
+    <button id="servicesBtn">Services</button>
+    <button id="aboutBtn">About Us</button>
+    <button id="signOutBtn">Sign Out</button>
+  </nav>
+
+  <!-- ✔ Parent Wrapper Contains Both Sections -->
+  <div class="dashboardWrapper">
+
+    <!-- Main Dashboard Content -->
+    <div id="dashboard" class="container">
+
+      <h2>Welcome to Expense Tracker</h2>
+
+      <div class="summary">
+        <p><strong>Total Income:</strong> <span id="totalIncome">0</span></p>
+        <p><strong>Total Expense:</strong> <span id="totalExpense">0</span></p>
+        <p><strong>Balance:</strong> <span id="balance">0</span></p>
+      </div>
+
+      <h3>Charts</h3>
+      <div class="charts">
+        <canvas id="pieChart"></canvas>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <div class="grid">
+        <div>
+          <h3>Add Transaction</h3>
+          <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input type="text" id="desc" placeholder="Description" />
+          <input type="number" id="amount" placeholder="Amount" />
+          <input type="date" id="date" />
+          <button id="addBtn">Add transaction</button>
+        </div>
+      </div>
+
+
+      <!-- Modal -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal">&times;</span>
+          <p id="modalMessage"></p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="transactionHistory">
+      <h3>Transaction History</h3>
+      <div id="history"></div>
+
+
+      <div class="btn-btn">
+        <button id="BtnViewAll">Veiw All</button>
+        <button id="BtnViewSelected">Veiw Selected</button>
+
+      </div>
+    </div>
+
+  </div>
+  <script>
+    // Page navigation handlers
+    document.getElementById("homeBtn").addEventListener("click", function () {
+      window.location.href = "homepage.html";
+    });
+
+    document.getElementById("dashboardBtn").addEventListener("click", function () {
+      window.location.href = "dashboard.html";
+    });
+
+    document.getElementById("servicesBtn").addEventListener("click", function () {
+      window.location.href = "services.html";
+    });
+
+    document.getElementById("aboutBtn").addEventListener("click", function () {
+      window.location.href = "about.html";
+    });
+
+    // Sign Out button handler
+    document.getElementById("signOutBtn").addEventListener("click", function () {
+      alert("You have been signed out!");
+      window.location.href = "signin.html";   // Change to your login page
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboard.js"></script>
+
+</body>
+
+</html>
