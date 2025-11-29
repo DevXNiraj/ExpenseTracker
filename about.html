@@ -16,11 +16,15 @@
       padding: 20px;
       text-align: center;
     }
-    nav {
-      background: #34495e;
-      padding: 10px;
-      text-align: center;
-    }
+nav {
+  background: #34495e;
+  padding: 10px 20px;
+  display: flex;                /* align items horizontally */
+  justify-content: space-evenly; /* links left, button right */
+  align-items: center;            /* center vertically */
+  position: static;               /* stays below header */
+  margin-top: 0;
+}
     nav a {
       color: white;
       margin: 0 12px;
@@ -126,9 +130,6 @@
     <p>We are a passionate team of developers and finance enthusiasts dedicated to building tools 
        that empower people to make smarter financial decisions.</p>
 
-    <!-- Mentor Card Centered -->
-    
-    <!-- Team Members in One Row Below Mentor -->
     
     </div>
   </section>
@@ -143,9 +144,6 @@
 
   document.getElementById("dashboardBtn").onclick = () =>
       window.location.href = "dashboard.html";
-
-  document.getElementById("signinBtn").onclick = () =>
-      window.location.href = "signin.html";
 
   document.getElementById("servicesBtn").onclick = () =>
       window.location.href = "services.html";

@@ -100,9 +100,26 @@
 
     // Sign Out button handler
     document.getElementById("signOutBtn").addEventListener("click", function () {
-      alert("You have been signed out!");
-      window.location.href = "signin.html";   // Change to your login page
-    });
+
+  let loggedUser = localStorage.getItem("loggedInUser");
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Update user state = inactive
+  users = users.map(user => {
+    if (user.email === loggedUser) {
+      user.state = "inactive";
+    }
+    return user;
+  });
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // Remove active session
+  localStorage.removeItem("loggedInUser");
+
+  alert("You have been signed out!");
+  window.location.href = "signin.html";
+});
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

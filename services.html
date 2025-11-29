@@ -29,11 +29,14 @@
   font-weight: bold;
   
 }
-    
 nav {
   background: #34495e;
-  padding: 10px;
-  text-align: center;
+  padding: 10px 20px;
+  display: flex;                /* align items horizontally */
+  justify-content: space-evenly; /* links left, button right */
+  align-items: center;            /* center vertically */
+  position: static;               /* stays below header */
+  margin-top: 0;
 }
 nav a {
   color: white;
@@ -101,10 +104,6 @@ nav a:hover { text-decoration: underline }
 
   document.getElementById("dashboardBtn").onclick = () => {
       window.location.href = "dashboard.html";
-  };
-
-  document.getElementById("signinBtn").onclick = () => {
-      window.location.href = "signin.html";
   };
 
   document.getElementById("servicesBtn").onclick = () => {

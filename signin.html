@@ -93,13 +93,21 @@ document.getElementById("signInBtn").addEventListener("click", function () {
     user.email === enteredUser && user.password === enteredPass
   );
 
-  if (userFound) {
+  let isLoggedin = false;
+
+if (userFound) {
+    isLoggedin = true;
+
+    userFound.state = "active";
+
+    
+    localStorage.setItem("users", JSON.stringify(users));
+
+    localStorage.setItem("loggedInUser", enteredUser);
+
     alert("Login successful! Redirecting to dashboard...");
-    localStorage.setItem("loggedInUser", enteredUser); // store active user
-    window.location.href = "dashboard.html"; // redirect to dashboard or homepage
-  } else {
-    alert("Invalid Email or Password. Please try again.");
-  }
+    window.location.href = "dashboard.html";
+}
 });
 </script>
 
