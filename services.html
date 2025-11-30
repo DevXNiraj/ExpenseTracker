@@ -9,7 +9,6 @@
       margin: 0;
       background: #f4f6f9;
       color: #333;
-      
     }
     header {
       background: #2c3e50;
@@ -17,38 +16,23 @@
       padding: 20px;
       text-align: center;
     }
-
-  #signOutBtn, #homeBtn, #dashboardBtn, #servicesBtn, #aboutBtn, #signupBtn, #signinBtn, #aboutBtn{
+nav {
+  background: #34495e;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#signOutBtn, #homeBtn, #dashboardBtn, #servicesBtn, #aboutBtn, #signupBtn, #signinBtn {
   width: 10%;
-  padding: 8px 0px;
+  padding: 8px 0;
   border-radius: 50px;
   background: white;
   color: #34495e;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  
 }
-nav {
-  background: #34495e;
-  padding: 10px 20px;
-  display: flex;                /* align items horizontally */
-  justify-content: space-evenly; /* links left, button right */
-  align-items: center;            /* center vertically */
-  position: static;               /* stays below header */
-  margin-top: 0;
-}
-nav a {
-  color: white;
-  margin: 0 12px;
-  text-decoration: none;
-  font-weight: bold;
-}
-nav a:hover { text-decoration: underline }
-    h1 {
-      margin: 20px;
-      text-align: center;
-    }
     .services {
       display: flex;
       flex-wrap: wrap;
@@ -64,83 +48,94 @@ nav a:hover { text-decoration: underline }
       width: 280px;
       transition: transform 0.3s;
     }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card h2 {
-      color: #2c3e50;
-    }
+    .card:hover { transform: translateY(-5px); }
     footer {
       background: #2c3e50;
       color: white;
       text-align: center;
       padding: 1px;
-      margin-bottom: 0;
       position: fixed;
       bottom: 0;
       width: 100%;
     }
   </style>
 </head>
-<body>
-  
-  <header>
-    <h1>Expense Tracker</h1>
-    <p style="color: white;">Manage your budget smartly</p>
-  </header>
 
-<nav>
+<body>
+
+<header>
+  <h1>Expense Tracker</h1>
+  <p>Manage your budget smartly</p>
+</header>
+
+<nav id="navbar">
   <button id="homeBtn">Home</button>
-  <button id="dashboardBtn">Dashboard</button>
   <button id="servicesBtn">Services</button>
   <button id="aboutBtn">About Us</button>
 </nav>
 
+<h1 style="text-align:center;">Our Services</h1>
+
+<div class="services">
+  <div class="card"><h2>Track Expenses</h2><p>Monitor your daily spending effortlessly.</p></div>
+  <div class="card"><h2>Budget Planner</h2><p>Create and manage custom budgets.</p></div>
+  <div class="card"><h2>Group Expenses</h2><p>Split bills easily with friends or family.</p></div>
+  <div class="card"><h2>Reports</h2><p>See charts and insights for better decisions.</p></div>
+</div>
+
+<footer>
+    <p style="color: white;"> Expense Tracker | Built with trust for better money management</p>
+  </footer>
+
 <script>
-  // Button navigation
-  document.getElementById("homeBtn").onclick = () => {
-      window.location.href = "homepage.html";
-  };
+  // NAVIGATION
+  homeBtn.onclick = () => location.href = "homepage.html";
+  servicesBtn.onclick = () => location.href = "services.html";
+  aboutBtn.onclick = () => location.href = "about.html";
 
-  document.getElementById("dashboardBtn").onclick = () => {
-      window.location.href = "dashboard.html";
-  };
+  // LOGIN LOGIC
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const nav = document.getElementById("navbar");
 
-  document.getElementById("servicesBtn").onclick = () => {
-      window.location.href = "services.html";
-  };
+  if (!loggedInUser) {
+    let signup = document.createElement("button");
+    signup.id = "signupBtn";
+    signup.innerText = "Sign-Up";
+    signup.onclick = () => location.href = "signup.html";
 
-  document.getElementById("aboutBtn").onclick = () => {
-      window.location.href = "about.html";
-  };
+    let signin = document.createElement("button");
+    signin.id = "signinBtn";
+    signin.innerText = "Sign-In";
+    signin.onclick = () => location.href = "signin.html";
+
+    nav.appendChild(signup);
+    nav.appendChild(signin);
+
+  } else {
+    let dashboard = document.createElement("button");
+    dashboard.id = "dashboardBtn";
+    dashboard.innerText = "Dashboard";
+    dashboard.onclick = () => location.href = "dashboard.html";
+
+    let signout = document.createElement("button");
+    signout.id = "signOutBtn";
+    signout.innerText = "Sign Out";
+    signout.onclick = () => {
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      users = users.map(u => {
+        if (u.email === loggedInUser) u.state = "inactive";
+        return u;
+      });
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.removeItem("loggedInUser");
+      alert("Signed out successfully!");
+      location.href = "signin.html";
+    };
+
+    nav.appendChild(dashboard);
+    nav.appendChild(signout);
+  }
 </script>
 
-
-    <h1>Our Services</h1>
-    <p style="text-align: center;">What Expense Tracker offers you</p>
-
-
-  <section class="services">
-    <div class="card">
-      <h2>Expense Logging</h2>
-      <p>Quickly record your daily expenses with categories and notes.</p>
-    </div>
-    <div class="card">
-      <h2>Budget Planning</h2>
-      <p>Set monthly budgets and track your spending against them.</p>
-    </div>
-    <div class="card">
-      <h2>Reports & Analytics</h2>
-      <p>Visualize your spending habits with charts and insights.</p>
-    </div>
-    <div class="card">
-      <h2>Cloud Sync</h2>
-      <p>Access your data securely across multiple devices.</p>
-    </div>
-  </section>
-
-  <footer >
-    <p> Expense Tracker | All Rights Reserved</p>
-  </footer>
 </body>
 </html>

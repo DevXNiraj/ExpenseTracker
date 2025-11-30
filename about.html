@@ -19,20 +19,11 @@
 nav {
   background: #34495e;
   padding: 10px 20px;
-  display: flex;                /* align items horizontally */
-  justify-content: space-evenly; /* links left, button right */
-  align-items: center;            /* center vertically */
-  position: static;               /* stays below header */
-  margin-top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-    nav a {
-      color: white;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    #signOutBtn, #homeBtn, #dashboardBtn, #servicesBtn, #aboutBtn, #signupBtn, #signinBtn {
+#signOutBtn, #homeBtn, #dashboardBtn, #servicesBtn, #aboutBtn, #signupBtn, #signinBtn {
   width: 10%;
   padding: 8px 0px;
   border-radius: 50px;
@@ -41,14 +32,8 @@ nav {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  
 }
-
-    nav a:hover { text-decoration: underline }
-    h1 {
-      margin: 20px;
-      text-align: center;
-    }
+    h1 { text-align: center; margin: 20px; }
     .content {
       max-width: 1000px;
       margin: 40px auto;
@@ -57,101 +42,95 @@ nav {
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .content h2 {
-      color: #34495e;
-    }
-    .mentor {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-    .team {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 0;
-      flex-wrap: nowrap; /* Ensure all 4 appear in a single row */
-    }
-    .member {
-      text-align: center;
-      width: 200px;
-      padding: 20px;
-      border-radius: 10px;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .member:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    }
-    .member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
     footer {
       background: #34495e;
       color: white;
       text-align: center;
-      padding-bottom: 15px;
-      margin-bottom: 0;
+      padding: 15px;
       position: fixed;
       bottom: 0;
       width: 100%;
     }
   </style>
 </head>
-<body>
-  
-  <header>
-    <h1>Expense Tracker</h1>
-    <p style="color: white;">Manage your budget smartly</p>
-  </header>
 
-  <nav>
+<body>
+
+<header>
+  <h1>Expense Tracker</h1>
+  <p>Manage your budget smartly</p>
+</header>
+
+<nav id="navbar">
   <button id="homeBtn">Home</button>
-  <button id="dashboardBtn">Dashboard</button>
   <button id="servicesBtn">Services</button>
   <button id="aboutBtn">About Us</button>
 </nav>
 
+<h1>About Us</h1>
+<p style="text-align:center;">Get to know Expense Tracker</p>
 
-  <h1>About Us</h1>
-  <p style="text-align: center;">Get to know Expense Tracker</p>
-  
-  <section class="content">
-    <h2>Our Mission</h2>
-    <p>We created Expense Tracker to help individuals and families take control of their finances. 
-       Our goal is to make money management simple, transparent, and stress-free.</p>
+<section class="content">
+  <h2>Our Mission</h2>
+  <p>We created Expense Tracker to help individuals and families take control of their finances.</p>
 
-    <h2>Who We Are</h2>
-    <p>We are a passionate team of developers and finance enthusiasts dedicated to building tools 
-       that empower people to make smarter financial decisions.</p>
+  <h2>Who We Are</h2>
+  <p>We are a passionate team of developers and finance enthusiasts.</p>
+</section>
 
-    
-    </div>
-  </section>
+<footer>
+  Expense Tracker | Built for better money management
+</footer>
 
-  <footer>
-    <p>Expense Tracker | Built with for better money management</p>
-  </footer>
+<script>
+  // Navigation
+  homeBtn.onclick = () => location.href = "homepage.html";
+  servicesBtn.onclick = () => location.href = "services.html";
+  aboutBtn.onclick = () => location.href = "about.html";
 
-  <script>
-  document.getElementById("homeBtn").onclick = () =>
-      window.location.href = "homepage.html";
+  // LOGIN LOGIC
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const nav = document.getElementById("navbar");
 
-  document.getElementById("dashboardBtn").onclick = () =>
-      window.location.href = "dashboard.html";
+  if (!loggedInUser) {
+    let signup = document.createElement("button");
+    signup.id = "signupBtn";
+    signup.innerText = "Sign-Up";
+    signup.onclick = () => location.href = "signup.html";
 
-  document.getElementById("servicesBtn").onclick = () =>
-      window.location.href = "services.html";
+    let signin = document.createElement("button");
+    signin.id = "signinBtn";
+    signin.innerText = "Sign-In";
+    signin.onclick = () => location.href = "signin.html";
 
-  document.getElementById("aboutBtn").onclick = () =>
-      window.location.href = "about.html";
+    nav.appendChild(signup);
+    nav.appendChild(signin);
+
+  } else {
+    let dashboard = document.createElement("button");
+    dashboard.id = "dashboardBtn";
+    dashboard.innerText = "Dashboard";
+    dashboard.onclick = () => location.href = "dashboard.html";
+
+    let signout = document.createElement("button");
+    signout.id = "signOutBtn";
+    signout.innerText = "Sign Out";
+    signout.onclick = () => {
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      users = users.map(u => {
+        if (u.email === loggedInUser) u.state = "inactive";
+        return u;
+      });
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.removeItem("loggedInUser");
+      alert("Signed out successfully!");
+      location.href = "signin.html";
+    };
+
+    nav.appendChild(dashboard);
+    nav.appendChild(signout);
+  }
 </script>
-
 
 </body>
 </html>

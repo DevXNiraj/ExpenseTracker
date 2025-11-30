@@ -1,0 +1,42 @@
+<div id="dashboard" class="container ">
+  <h2>Welcome to Expense Tracker</h2>
+  <div class="summary">
+    <p><strong>Total Income:</strong> <span id="totalIncome">0</span></p>
+    <p><strong>Total Expense:</strong> <span id="totalExpense">0</span></p>
+    <p><strong>Balance:</strong> <span id="balance">0</span></p>
+  </div>
+  <h3>Charts</h3>
+  <div class="charts">
+    <canvas id="pieChart" width="320" height="320"></canvas>
+    <canvas id="barChart" width="480" height="320"></canvas>
+  </div>
+  <div class="grid">
+    <div class="input-section">
+      <h3>Add Transaction</h3>
+      <select id="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <input type="text" id="desc" placeholder="Description" />
+      <input type="number" id="amount" placeholder="Amount" />
+      <input type="date" id="date" />
+      <button id="addBtn">Add transaction</button>
+    </div>
+    <div class="history-section">
+      <h3>Transaction History</h3>
+      <div id="history"></div>
+    </div>
+    <div class="recent-section">
+      <h3>Recent Transactions</h3>
+      <div id="recentTransactions"></div>
+    </div>
+  </div>
+  <button id="signOutBtn">Sign Out</button>
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <p id="modalMessage"></p>
+    </div>
+  </div>
+</div>

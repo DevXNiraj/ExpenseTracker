@@ -35,26 +35,23 @@
         <p><strong>Balance:</strong> <span id="balance">0</span></p>
       </div>
 
-      <h3>Charts</h3>
+      <h3></h3>
       <div class="charts">
         <canvas id="pieChart"></canvas>
         <canvas id="barChart"></canvas>
       </div>
 
-      <div class="grid">
-        <div>
-          <h3>Add Transaction</h3>
-          <select id="type">
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-          </select>
-          <input type="text" id="desc" placeholder="Description" />
-          <input type="number" id="amount" placeholder="Amount" />
-          <input type="date" id="date" />
-          <button id="addBtn">Add transaction</button>
-        </div>
+<div class="transactionHistory" style="width: 90%;">
+    
+      <div class="btn-btn">
+        <h3 style="text-align: left;" >Transaction History</h3>
+        <button id="BtnViewAll">Veiw All</button>
+        
       </div>
+      <div id="history"></div>
 
+           
+ </div>
 
       <!-- Modal -->
       <div id="modal" class="modal">
@@ -66,20 +63,18 @@
 
     </div>
 
-
-    <div class="transactionHistory">
-      <h3>Transaction History</h3>
-      <div id="history"></div>
-
-
-      <div class="btn-btn">
-        <button id="BtnViewAll">Veiw All</button>
-        <button id="BtnViewSelected">Veiw Selected</button>
-
+<div class="container2">
+          <h3>Add Transaction</h3>
+          <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input type="text" id="desc" placeholder="Description" />
+          <input type="number" id="amount" placeholder="Amount" />
+          <input type="date" id="date" />
+          <button id="addBtn">Add transaction</button>
+        </div>
       </div>
-    </div>
-
-  </div>
   <script>
     // Page navigation handlers
     document.getElementById("homeBtn").addEventListener("click", function () {

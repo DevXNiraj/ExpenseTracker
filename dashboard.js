@@ -1,7 +1,12 @@
 // -------------------------------
-// Load Data from localStorage
+// Get logged-in user
 // -------------------------------
-let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+let loggedInUser = localStorage.getItem("loggedInUser");
+
+// -------------------------------
+// Load Data from localStorage (user-specific)
+// -------------------------------
+let transactions = JSON.parse(localStorage.getItem("transactions_" + loggedInUser)) || [];
 
 // Select elements
 const type = document.getElementById("type");
@@ -49,7 +54,9 @@ addBtn.addEventListener("click", () => {
   };
 
   transactions.push(transaction);
-  localStorage.setItem("transactions", JSON.stringify(transactions));
+
+  // SAVE transactions for this specific user
+  localStorage.setItem("transactions_" + loggedInUser, JSON.stringify(transactions));
 
   showModal("Transaction added successfully!");
   updateUI();
@@ -70,11 +77,17 @@ function clearInputs() {
 // -------------------------------
 function updateUI() {
   let income = 0,
-    expense = 0;
+      expense = 0;
 
   history.innerHTML = "";
 
-  transactions.forEach((t) => {
+  // ---------------------------
+  // LIMIT number of transactions shown
+  // ---------------------------
+  const limit = 8; 
+  const visibleTransactions = transactions.slice(-limit);
+
+  visibleTransactions.forEach((t) => {
     if (t.type === "income") income += t.amount;
     else expense += t.amount;
 
@@ -101,14 +114,12 @@ function updateUI() {
 let pieChart, barChart;
 
 function updateCharts(income, expense) {
-  // Destroy previous charts
   if (pieChart) pieChart.destroy();
   if (barChart) barChart.destroy();
 
   const ctx1 = document.getElementById("pieChart").getContext("2d");
   const ctx2 = document.getElementById("barChart").getContext("2d");
 
-  // Pie chart
   pieChart = new Chart(ctx1, {
     type: "pie",
     data: {
@@ -122,7 +133,6 @@ function updateCharts(income, expense) {
     },
   });
 
-  // Bar chart
   barChart = new Chart(ctx2, {
     type: "bar",
     data: {
